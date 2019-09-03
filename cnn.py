@@ -369,14 +369,14 @@ def init_test():
 def test():
     a, b, cl = init_test()
     cl.forward(a)
-    print cl.output_array
+    print (cl.output_array)
 
 def test_bp():
     a, b, cl = init_test()
     cl.backward(a, b, IdentityActivator())
     cl.update()
-    print cl.filters[0]
-    print cl.filters[1]
+    print (cl.filters[0])
+    print (cl.filters[1])
 
 
 def gradient_check():
@@ -409,8 +409,8 @@ def gradient_check():
                 err2 = error_function(cl.output_array)
                 expect_grad = (err1 - err2) / (2 * epsilon)
                 cl.filters[0].weights[d,i,j] += epsilon
-                print 'weights(%d,%d,%d): expected - actural %f - %f' % (
-                    d, i, j, expect_grad, cl.filters[0].weights_grad[d,i,j])
+                print ('weights(%d,%d,%d): expected - actural %f - %f' % (
+                    d, i, j, expect_grad, cl.filters[0].weights_grad[d,i,j]))
 
 
 def init_pool_test():
@@ -438,13 +438,13 @@ def init_pool_test():
 def test_pool():
     a, b, mpl = init_pool_test()
     mpl.forward(a)
-    print 'input array:\n%s\noutput array:\n%s' % (a,
-        mpl.output_array)
+    print ('input array:\n%s\noutput array:\n%s' % (a,
+        mpl.output_array))
 
 
 def test_pool_bp():
     a, b, mpl = init_pool_test()
     mpl.backward(a, b)
-    print 'input array:\n%s\nsensitivity array:\n%s\ndelta array:\n%s' % (
-        a, b, mpl.delta_array)
+    print ('input array:\n%s\nsensitivity array:\n%s\ndelta array:\n%s' % (
+        a, b, mpl.delta_array))
 
